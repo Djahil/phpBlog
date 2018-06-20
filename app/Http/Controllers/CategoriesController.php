@@ -6,11 +6,25 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
-    public function index() {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
 
     }
 
-    public function show() {
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
 
     }
 }

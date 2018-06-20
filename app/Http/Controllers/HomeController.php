@@ -6,7 +6,14 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function home() {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function home()
+    {
 
     }
 }
