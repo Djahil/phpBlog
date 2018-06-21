@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// La route user
+Route::resource('admin/users', 'AdminUsersController');
+
+// La route post
+Route::resource('admin/posts', 'AdminPostsController');
