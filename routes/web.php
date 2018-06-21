@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/admin', 'AdminController@Dashboard');
+
+Route::resource('/admin/comments', 'AdminCommentsController', ['only'=>[
+    'index',
+    'edit',
+    'destroy'
+]] );
