@@ -11,33 +11,51 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-
 /*
- * Route vers la homepage
+ * Route vers la homepage de la section utilisateur
  */
 Route::get('/', 'HomeController@home');
 
 /*
- * Route vers la liste des posts
+ * Route vers la liste des posts de la section utilisateur
  */
-Route::get('/posts', 'PostsController@index');
+Route::get('posts', 'PostsController@index');
 
 /*
- * Route vers un post
+ * Route vers un post de la section utilisateur
  */
-Route::get('/posts/show', 'PostsController@show');
+Route::get('posts/show', 'PostsController@show');
 
 /*
- * Route vers la liste des catégories
+ * Route vers la liste des catégories de la section utilisateur
  */
-Route::get('/categories', 'CategoriesController@index');
+Route::get('categories', 'CategoriesController@index');
 
 /*
- * Route vers une catégorie de posts
+ * Route vers une catégorie de posts de la section utilisateur
  */
-Route::get('/categories/show', 'CategoriesController@show');
+Route::get('categories/show', 'CategoriesController@show');
+
+/*
+ * Route vers le dashboard admin
+ */
+Route::get('admin', 'AdminController@Dashboard');
+
+/*
+ * Route vers les comments de la section admin
+ */
+Route::resource('admin/comments', 'AdminCommentsController', ['only'=>[
+    'index',
+    'edit',
+    'destroy'
+]] );
+
+/*
+ * Route vers les users de la section admin
+ */
+Route::resource('admin/users', 'AdminUsersController');
+
+/*
+ * Route vers les posts de la section admin
+ */
+Route::resource('admin/posts', 'AdminPostsController');
