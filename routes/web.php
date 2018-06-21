@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('/admin/categories', 'AdminCategoriesController'); 
+
+Route::get('/admin/categories/{action}', function ($action) {
+    return $action;
+});
