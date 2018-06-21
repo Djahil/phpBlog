@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 // La route user
-Route::ressource('admin/users', 'AdminUsersController');
+Route::resource('admin/users', 'AdminUsersController');
 
 // La route post
-Route::ressource('admin/posts', 'AdminPostsController');
+Route::resource('admin/posts', 'AdminPostsController');
