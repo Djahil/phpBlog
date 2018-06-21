@@ -11,10 +11,18 @@
 |
 */
 
-Route::get('/admin', 'AdminController@Dashboard');
+Route::get('admin', 'AdminController@Dashboard');
 
-Route::resource('/admin/comments', 'AdminCommentsController', ['only'=>[
+Route::resource('admin/comments', 'AdminCommentsController', ['only'=>[
     'index',
     'edit',
     'destroy'
 ]] );
+
+
+// La route user
+Route::resource('admin/users', 'AdminUsersController');
+
+// La route post
+Route::resource('admin/posts', 'AdminPostsController');
+
