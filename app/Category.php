@@ -11,7 +11,7 @@ class Category extends Model
     ];
 
     public function photos(){
-        return $this->morphOne('App\Photo', 'imageable');
+        return $this->morphMany('App\Photo', 'imageable');
     }
 
     public function posts(){
