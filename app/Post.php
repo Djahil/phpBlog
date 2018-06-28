@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillablle = [
+    protected $fillable = [
         "title",
         "content"
     ];
@@ -16,7 +16,7 @@ class Post extends Model
         return $this->belongsTo("App\User");
     }
 
-    public function comment()
+    public function comments()
     {
         return $this->hasMany("App\Comment");;
     }
@@ -26,7 +26,7 @@ class Post extends Model
         return $this->hasOne("App\Category");;
     }
 
-    public function photo()
+    public function photos()
     {
         return $this->morphMany('App\Photo', 'imageable');
     }
