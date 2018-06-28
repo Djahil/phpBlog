@@ -69,3 +69,7 @@ Route::resource('admin/users', 'AdminUsersController');
  * Route vers les posts de la section admin
  */
 Route::resource('admin/posts', 'AdminPostsController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
