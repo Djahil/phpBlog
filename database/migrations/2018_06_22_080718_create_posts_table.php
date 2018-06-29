@@ -21,9 +21,11 @@ class CreatePostsTable extends Migration
             $table->integer('photo_id')->index()->unsigned()->nullable();
             $table->integer('category_id')->index()->unsigned()->nullable();
 
+
             $table->timestamps();
           
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 
