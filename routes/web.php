@@ -49,7 +49,7 @@ Route::get('categories/show', 'CategoriesController@show');
 /*
  * Route vers le dashboard admin
  */
-Route::get('admin', 'AdminController@Dashboard');
+Route::get('admin', 'AdminPostsController@index')->name("index");
 
 /*
  * Route vers les comments de la section admin
