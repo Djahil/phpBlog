@@ -17,14 +17,15 @@ Route::get('/', function () {
 
 Route::resource('/admin/categories', 'AdminCategoriesController'); 
 
-Route::get('/admin/categories/{action}', function ($action) {
-    return $action;
-});
-
 /*
  * Route vers la homepage de la section utilisateur
  */
 Route::get('/', 'HomeController@home');
+
+/*
+ * Route vers la homepage de la section utilisateur
+ */
+Route::get('/admin', 'AdminController@index');
 
 /*
  * Route vers la liste des posts de la section utilisateur
@@ -37,19 +38,9 @@ Route::get('posts', 'PostsController@index');
 Route::get('posts/show', 'PostsController@show');
 
 /*
- * Route vers la liste des catégories de la section utilisateur
- */
-Route::get('categories', 'CategoriesController@index');
-
-/*
- * Route vers une catégorie de posts de la section utilisateur
- */
-Route::get('categories/show', 'CategoriesController@show');
-
-/*
  * Route vers le dashboard admin
  */
-Route::get('admin', 'AdminPostsController@index')->name("index");
+Route::get('admin/posts', 'AdminPostsController@index')->name("index");
 
 /*
  * Route vers les comments de la section admin
