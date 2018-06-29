@@ -10,7 +10,7 @@ class Comment extends Model
         'is_active', 'content', 'author', 'email'
     ];
 
-    public function posts() {
+    public function post() {
         return $this->belongsTo("App\Post");
     }
 }

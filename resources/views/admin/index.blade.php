@@ -10,6 +10,10 @@
             @foreach($posts as $post)
                 <li><a href ="{{route("posts.show", $post->id)}}">{{$post->title}}</a></li>
             @endforeach
-        </ul>
+    </ul>
+
+    <div style="text-align: center; margin-top: 100px">
+        <a href="{{route("comments.index")}}">Moderate Comments</a>
+    </div>
 
 @stop
