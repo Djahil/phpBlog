@@ -31,19 +31,10 @@ class AdminPostsController extends Controller
     public function store(PostsRequest $request)
     {
         $User = User::findOrFail(1);
-        //$input = $request->all();
 
         $User->posts()->save(
             new Post($request->all())
         );
-        // On instancie un objet post qui contient les informations du nouveau post
-//        $Post = new Post();
-//        $Post->title = input["title"];
-//        $Post->content = input["content"];
-//        $Post->photo = input["is_active"];
-//
-//        On crée le post
-//        $User->posts()->save($Post);
 
         // On redirige vers la page index
         return redirect()->route("posts.index");

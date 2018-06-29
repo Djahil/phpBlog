@@ -48,6 +48,7 @@ Route::get('admin/posts', 'AdminPostsController@index')->name("index");
 Route::resource('admin/comments', 'AdminCommentsController', ['only'=>[
     'index',
     'edit',
+    'update',
     'destroy'
 ]] );
 
