@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <ul>
+    <ul style="display: grid; margin:auto;  width: 500px;">
 
         @foreach($comments as $comment)
             <li>
