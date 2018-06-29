@@ -14,7 +14,6 @@
 
     <div style="text-align: center; margin-top: 100px;">
         <a href="{{route("posts.create")}}">Create</a>
-        {{--<a href="{{route("posts.category")}}">Categories</a>--}}
     </div>
 
 @stop
