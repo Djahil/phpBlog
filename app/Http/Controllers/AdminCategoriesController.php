@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+use App\Category;
+use App\Http\Requests\CategoriesRequest;
 
 class AdminCategoriesController extends Controller
 {
@@ -13,7 +16,9 @@ class AdminCategoriesController extends Controller
      */
     public function index()
     {
-        return view('admin-categories');
+        $Categories = Category::all();
+
+        return view('admin.categories.index', compact("Categories"));
     }
 
     /**
@@ -23,7 +28,7 @@ class AdminCategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -32,20 +37,13 @@ class AdminCategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriesRequest $request)
     {
-        //
-    }
+        $Category = new Category($request->all());
+        $Category->save();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        // On redirige vers la page index
+        return redirect()->route("categories.index");
     }
 
     /**
@@ -56,9 +54,10 @@ class AdminCategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+        $Category = Category::findOrfail($id);
 
+        return view('admin.categories.edit', compact("Category"));
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -66,9 +65,16 @@ class AdminCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoriesRequest $request, $id)
     {
-        //
+        //Cherche le post à modifier
+        $Category = Category::findOrFail($id);
+
+        //On le met à jour avec les nouvelles données
+        $Category->update($request->all());
+
+        // On redirige vers la page de notre choix
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -79,6 +85,8 @@ class AdminCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::whereId($id)->delete();
+
+        return redirect()->route('categories.index');
     }
 }

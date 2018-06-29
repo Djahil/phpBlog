@@ -17,10 +17,10 @@ class AdminPostsController extends Controller
     public function index()
     {
         // On récupère tous les Posts de notre BDD et on stock dans $posts
-        $posts = Post::all();
+        $Posts = Post::all();
 
         // On retrourne la vue posts/index.blade.php et on lui envoie la variable $posts
-        return view('admin.index', compact("posts"));
+        return view('admin.posts.index', compact("Posts"));
     }
 
     public function create()
