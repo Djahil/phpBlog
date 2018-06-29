@@ -15,7 +15,8 @@
         {!! Form::label("images", "Images") !!}
         {!! Form::file('photo') !!}
 
-        {{--{!! Form::select('Category') !!}--}}
+        {!! Form::label("categories", "Categories") !!}
+        {!! Form::select('Categories', $Categories) !!}
 
         {!! Form::submit("Update")!!}
 

@@ -12,8 +12,6 @@
         {!! Form::label("images", "Images") !!}
         {!! Form::file('photo') !!}
 
-        {{--{!! Form::select('Category') !!}--}}
-
         {!! Form::submit("Update")!!}
 
     {!! Form::close() !!}
