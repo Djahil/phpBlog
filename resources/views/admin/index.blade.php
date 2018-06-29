@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ma Page Index</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
-</head>
-<body>
-<h1>Ma page index</h1>
-</body>
-</html>
+@extends('layouts.app')
+
+@section('content')
+
+    <h1 style="text-align: center">Posts</h1>
+
+    <ul style="display: grid; margin:auto;  width: 500px;">
+            {{-- A chaque tour de boucle, tu vas créer un élement LI avec le titre du post et
+            un lien qui redirige vers la page show de ce post --}}
+            @foreach($posts as $post)
+                <li><a href ="{{route("posts.show", $post->id)}}">{{$post->title}}</a></li>
+            @endforeach
+        </ul>
+
+@stop

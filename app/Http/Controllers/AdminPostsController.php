@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+use App\User;
+use App\Http\Requests\PostsRequest;
 
 class AdminPostsController extends Controller
 {
@@ -13,28 +16,37 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        return view('admin/index');
+        // On récupère tous les Posts de notre BDD et on stock dans $posts
+        $posts = Post::all();
+
+        // On retrourne la vue posts/index.blade.php et on lui envoie la variable $posts
+        return view('admin.index', compact("posts"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(PostsRequest $request)
     {
-        //
+        $User = User::findOrFail(1);
+        //$input = $request->all();
+
+        $User->posts()->save(
+            new Post($request->all())
+        );
+        // On instancie un objet post qui contient les informations du nouveau post
+//        $Post = new Post();
+//        $Post->title = input["title"];
+//        $Post->content = input["content"];
+//        $Post->photo = input["is_active"];
+//
+//        On crée le post
+//        $User->posts()->save($Post);
+
+        // On redirige vers la page index
+        return redirect()->route("posts.index");
     }
 
     /**
@@ -45,7 +57,9 @@ class AdminPostsController extends Controller
      */
     public function show($id)
     {
-        //
+        $Post = Post::findOrFail($id);
+
+        return view('admin.posts.show', compact("Post"));
     }
 
     /**
@@ -56,7 +70,9 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Post = Post::findOrfail($id);
+
+        return view('admin.posts.edit', compact("Post"));
     }
 
     /**
@@ -66,9 +82,19 @@ class AdminPostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostsRequest $request, $id)
     {
-        //
+        //Cherche le post à modifier
+        $Post = Post::findOrFail($id);
+
+        //On le met à jour avec les nouvelles données
+        $Post->update($request->all());
+
+        // On redirige vers la page de notre choix
+        return redirect()->route('posts.index');
+
+        // var_dump($request->all());
+        // die();
     }
 
     /**
@@ -79,6 +105,8 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::whereId($id)->delete();
+
+        return redirect()->route('posts.index');
     }
 }
