@@ -7,7 +7,8 @@
         @foreach($comments as $comment)
             <li>
                 <div>
-                    <h3>{{$comment->author}}</h3>
+                    <h3>{{$comment->post->title}}</h3><br />
+                    <p>{{$comment->author}}</p>
                     <p>{{$comment->email}}</p><br />
                     <p>{{$comment->content}}</p><br />
                     <p>is_active :
