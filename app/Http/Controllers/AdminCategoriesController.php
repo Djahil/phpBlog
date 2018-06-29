@@ -42,28 +42,8 @@ class AdminCategoriesController extends Controller
         $Category = new Category($request->all());
         $Category->save();
 
-
-//        $Post = new Category();
-//        $Post->name = input["title"];
-//
-//        On crée le post
-//        $Post->category()->save($Post);
-
         // On redirige vers la page index
         return redirect()->route("categories.index");
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $Categories = Category::findOrFail($id);
-
-        return view('admin.categories.show', compact("Categories"));
     }
 
     /**
