@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Comment;
+use App\Http\Requests\CommentsRequest;
+
 
 class AdminCommentsController extends Controller
 {
@@ -13,7 +16,9 @@ class AdminCommentsController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::all();
+
+        return view("admin.comments.index", compact("comments"));
     }
 
     /**
@@ -24,7 +29,21 @@ class AdminCommentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Comment = Comment::findOrFail($id);
+
+        return view('admin.comments.edit', compact("Comment"));
+    }
+
+    public function update(CommentsRequest $request, $id)
+    {
+        //Cherche le comment à modifier
+        $Comment = Comment::findOrFail($id);
+
+        //On le met à jour avec les nouvelles données
+        $Comment->update($request->all());
+
+        // On redirige vers la page de notre choix
+        return redirect()->route('comments.index');
     }
 
 
@@ -36,6 +55,8 @@ class AdminCommentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Comment::whereId($id)->delete();
+
+        return redirect()->route('comments.index');
     }
 }
