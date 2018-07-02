@@ -45,7 +45,8 @@ class AdminPostsController extends Controller
         );
 
         // On redirige vers la page index
-        return redirect()->route("posts.index");
+        return redirect()->route("posts.index")->with('success', 'Votre post a bien été crée');
+
     }
 
     /**
