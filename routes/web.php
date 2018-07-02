@@ -19,19 +19,21 @@ Route::get('/', 'HomeController@home');
 /*
  * Route vers la homepage de la section utilisateur
  */
-Route::get('/admin', 'AdminController@index');
+Route::get('/admin', 'AdminController@index')->name("admin.dashboard");
 
 Route::resource('/admin/categories', 'AdminCategoriesController');
 
 /*
  * Route vers la liste des posts de la section utilisateur
  */
-Route::get('/posts', 'PostsController@index');
+Route::get('/posts', 'PostsController@index')->name("guest.index");
+
 
 /*
  * Route vers un post de la section utilisateur
  */
-Route::get('/posts/show', 'PostsController@show');
+Route::get('/posts/{post}', 'PostsController@show')->name("show");
+
 
 /*
  * Route vers le dashboard admin
@@ -44,6 +46,7 @@ Route::get('/admin/posts', 'AdminPostsController@index')->name("index");
 Route::resource('/admin/comments', 'AdminCommentsController', ['only'=>[
     'index',
     'edit',
+    'update',
     'destroy'
 ]] );
 
@@ -60,4 +63,6 @@ Route::resource('/admin/posts', 'AdminPostsController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/posts/{post}', 'CommentsController@store')->name('comments.store');
 

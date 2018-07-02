@@ -52,10 +52,11 @@
     </table>
 
     <div style="text-align: center; margin-top: 100px;">
+
         <a href="{{route("posts.create")}}">
             <button type="button" class="btn btn-success">Create</button>
         </a>
-        {{--<a href="{{route("posts.category")}}">Categories</a>--}}
+        <a href="{{route("admin.dashboard")}}">Back</a>
     </div>
 
     {{--@include('flash-message')--}}

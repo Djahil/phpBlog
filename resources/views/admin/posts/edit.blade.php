@@ -13,7 +13,7 @@
         {!! Form::textarea("content", null) !!}
 
         {!! Form::label("images", "Images") !!}
-        {!! Form::file('photo') !!}
+        {!! Form::file('images') !!}
 
         {!! Form::label("categories", "Categories") !!}
         {!! Form::select('Categories', $Categories) !!}
@@ -27,5 +27,10 @@
         {!! Form::submit("Delete") !!}
 
     {!! Form::close() !!}
+
+    <br />
+    <div style="text-align: center">
+        <a href="{{route("posts.show", $Post->id)}}">Back</a>
+    </div>
 
 @stop

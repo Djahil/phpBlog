@@ -6,6 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
+use App\Comment;
 use App\Http\Requests\PostsRequest;
 
 class AdminPostsController extends Controller
@@ -35,20 +36,13 @@ class AdminPostsController extends Controller
     {
         $User = User::findOrFail(1);
 
-        // On récupère l'id de la catégorie sélectionnée dans le select
+      // On récupère l'id de la catégorie sélectionnée dans le select
         $inputCatId = $request->input('Categories');
+
 
         $User->posts()->save(
             new Post($request->all())
         );
-        // On instancie un objet post qui contient les informations du nouveau post
-//        $Post = new Post();
-//        $Post->title = input["title"];
-//        $Post->content = input["content"];
-//        $Post->photo = input["is_active"];
-//
-//        On crée le post
-//        $User->posts()->save($Post);
 
         // On redirige vers la page index
         return redirect()->route("posts.index")->with('success', 'Votre post a bien été crée');
@@ -114,6 +108,7 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         Post::whereId($id)->delete();
+        Comment::wherePostId($id)->delete();
 
         return redirect()->route('posts.index');
     }

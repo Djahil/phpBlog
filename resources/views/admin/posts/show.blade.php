@@ -10,4 +10,9 @@
         <a href="{{route('posts.edit', $Post->id)}}">Modifier</a>
     </p>
 
+    <br />
+    <div style="text-align: center">
+        <a href="{{route("posts.index")}}">Back</a>
+    </div>
+
 @stop
