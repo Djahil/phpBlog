@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
@@ -25,12 +26,18 @@ class AdminPostsController extends Controller
 
     public function create()
     {
-        return view('admin.posts.create');
+        $Categories = Category::pluck('name');
+
+        return view('admin.posts.create', compact("Categories"));
     }
 
     public function store(PostsRequest $request)
     {
         $User = User::findOrFail(1);
+
+      // On récupère l'id de la catégorie sélectionnée dans le select
+        $inputCatId = $request->input('Categories');
+
 
         $User->posts()->save(
             new Post($request->all())
@@ -63,7 +70,9 @@ class AdminPostsController extends Controller
     {
         $Post = Post::findOrfail($id);
 
-        return view('admin.posts.edit', compact("Post"));
+        $Categories = Category::pluck('name');
+
+        return view('admin.posts.edit', compact("Post", "Categories"));
     }
 
     /**

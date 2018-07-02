@@ -12,10 +12,11 @@
         {!! Form::label("content", "Content") !!}
         {!! Form::textarea("content", null) !!}
 
+        {!! Form::label("categories", "Categories") !!}
+        {!! Form::select('Categories', $Categories) !!}
+
         {!! Form::label("images", "Images") !!}
         {!! Form::file('photo') !!}
-
-        {!! Form::select('Category') !!}
 
         {!! Form::submit("Create Post") !!}
 
