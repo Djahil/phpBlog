@@ -23,4 +23,9 @@
 
     {!! Form::close() !!}
 
+    <br />
+    <div style="text-align: center">
+        <a href="{{route("categories.index", $Category->id)}}">Back</a>
+    </div>
+
 @stop

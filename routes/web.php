@@ -25,7 +25,7 @@ Route::get('/', 'HomeController@home');
 /*
  * Route vers la homepage de la section utilisateur
  */
-Route::get('/admin', 'AdminController@index');
+Route::get('/admin', 'AdminController@index')->name("admin.dashboard");
 
 /*
  * Route vers la liste des posts de la section utilisateur

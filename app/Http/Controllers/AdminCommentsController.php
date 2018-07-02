@@ -18,6 +18,8 @@ class AdminCommentsController extends Controller
     public function index()
     {
         $comments = Comment::all();
+/*        var_dump($comments);
+        die();*/
 
         return view("admin.comments.index", compact("comments"));
     }

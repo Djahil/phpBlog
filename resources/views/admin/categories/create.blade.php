@@ -18,4 +18,9 @@
 
     @include('includes.errors')
 
+    <br />
+    <div style="text-align: center">
+        <a href="{{route("categories.index")}}">Back</a>
+    </div>
+
 @stop

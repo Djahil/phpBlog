@@ -14,6 +14,7 @@
 
     <div style="text-align: center; margin-top: 100px;">
         <a href="{{route("posts.create")}}">Create</a>
+        <a href="{{route("admin.dashboard")}}">Back</a>
     </div>
 
 @stop

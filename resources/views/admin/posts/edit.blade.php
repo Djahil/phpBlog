@@ -28,4 +28,9 @@
 
     {!! Form::close() !!}
 
+    <br />
+    <div style="text-align: center">
+        <a href="{{route("posts.show", $Post->id)}}">Back</a>
+    </div>
+
 @stop

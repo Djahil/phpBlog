@@ -6,6 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
+use App\Comment;
 use App\Http\Requests\PostsRequest;
 
 class AdminPostsController extends Controller
@@ -106,6 +107,7 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         Post::whereId($id)->delete();
+        Comment::wherePostId($id)->delete();
 
         return redirect()->route('posts.index');
     }

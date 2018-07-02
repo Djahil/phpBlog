@@ -27,7 +27,10 @@
 
     {!! Form::close() !!}
 
-
+    <br />
+    <div style="text-align: center">
+        <a href="{{route("comments.index")}}">Back</a>
+    </div>
 
 
 
