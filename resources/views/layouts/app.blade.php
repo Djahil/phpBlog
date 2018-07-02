@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+
     <style>
         html, body {
             background-color: whitesmoke;
@@ -69,6 +70,10 @@
             margin-top: 10px;
             margin-bottom: 10px;
         }
+
+        tbody ~ tr ~ td.action {
+            border-top: none !important;
+        }
     </style>
 
 </head>
@@ -87,9 +92,11 @@
                     </button>
 
                     <!-- Branding Image -->
+                    {{--@if (Auth::user()->isAdmin())--}}
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
+                    {{--@endif--}}
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
