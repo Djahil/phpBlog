@@ -30,12 +30,12 @@ Route::get('/admin', 'AdminController@index')->name("admin.dashboard");
 /*
  * Route vers la liste des posts de la section utilisateur
  */
-Route::get('posts', 'PostsController@index');
+Route::get('posts', 'PostsController@index')->name("guest.index");
 
 /*
  * Route vers un post de la section utilisateur
  */
-Route::get('posts/show', 'PostsController@show');
+Route::get('posts/{post}', 'PostsController@show')->name("show");
 
 /*
  * Route vers le dashboard admin
@@ -65,3 +65,6 @@ Route::resource('admin/posts', 'AdminPostsController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::post('/posts/{post}', 'CommentsController@store')->name('comments.store');

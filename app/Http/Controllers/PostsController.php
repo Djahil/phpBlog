@@ -20,30 +20,7 @@ class PostsController extends Controller
         $posts = Post::all();
 
         // On retrourne la vue posts/index.blade.php et on lui envoie la variable $posts
-        return view('posts.index', compact("posts"));
-    }
-
-    public function create()
-    {
-        return view('posts.create');
-    }
-
-    public function store(PostsRequest $request, $id)
-    {
-        $User = User::findOrFail($id);
-        //$input = $request->all();
-
-        // On instancie un objet post qui contient les informations du nouveau post
-        $Post = new Post();
-        $Post->title = input["title"];
-        $Post->content = input["content"];
-        $Post->photo = input["is_active"];
-
-        // On crée le post
-        $User->posts()->save($Post);
-
-        // On redirige vers la page index
-        return redirect(admin.posts);
+        return view('index', compact("posts"));
     }
 
         /**
@@ -54,6 +31,9 @@ class PostsController extends Controller
          */
     public function show($id)
     {
+        $Post = Post::findOrFail($id);
+        $Comments = $Post->comments()->whereIsActive(1)->get();
 
+        return view('show', compact("Post", "Comments"));
     }
 }
