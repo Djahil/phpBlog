@@ -10,7 +10,7 @@
         {!! Form::text("name", null) !!}
 
         {!! Form::label("images", "Images") !!}
-        {!! Form::file('photo') !!}
+        {!! Form::file('images') !!}
 
         {!! Form::submit("Update")!!}
 
