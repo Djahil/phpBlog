@@ -9,6 +9,11 @@ use App\Http\Requests\CategoriesRequest;
 
 class AdminCategoriesController extends Controller
 {
+    // Permet d'isoler le constructeur pour un middleware donné
+    public function __construct(){
+        $this->middleware('isAdmin');
+    }
+
     /**
      * Display a listing of the resource.
      *

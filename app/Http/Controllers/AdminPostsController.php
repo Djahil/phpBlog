@@ -11,6 +11,11 @@ use App\Http\Requests\PostsRequest;
 
 class AdminPostsController extends Controller
 {
+    // Permet d'isoler le constructeur pour un middleware donné
+    public function __construct(){
+        $this->middleware('isAdmin');
+    }
+
     /**
      * Display a listing of the resource.
      *

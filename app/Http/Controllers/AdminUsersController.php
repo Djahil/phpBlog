@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class AdminUsersController extends Controller
 {
+    // Permet d'isoler le constructeur pour un middleware donné
+    public function __construct(){
+        $this->middleware('isAdmin');
+    }
+
     /**
      * Display a listing of the resource.
      *
