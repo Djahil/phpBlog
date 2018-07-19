@@ -11,28 +11,28 @@
 |
 */
 
+/*
+ * Route vers la homepage
+ */
+
+Route::get('/', 'HomeController@home');
 
 
 /*
- * Route vers la homepage de la section utilisateur
- */
+* Route vers la section admin
+*/
 
 Route::group(['middleware' => 'auth'], function() {
 
     /*
-    * Route vers la homepage de la section utilisateur
+    * Route vers le dashboard admin
     */
-
-    Route::get('/', 'HomeController@home');
 
     Route::get('/admin', 'AdminController@index')->name("admin.dashboard");
 
     Route::resource('/admin/categories', 'AdminCategoriesController');
 
-    /*
-    * Route vers le dashboard admin
-    */
-    Route::get('/admin/posts', 'AdminPostsController@index')->name("index");
+    /* Route::get('/admin/posts', 'AdminPostsController@index')->name("index"); */
 
     /*
     * Route vers les comments de la section admin

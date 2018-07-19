@@ -8,7 +8,7 @@
 
     <br />
     <div style="text-align: center">
-        <a href="{{route("guest.index")}}">Back</a>
+        <a href="{{route("home")}}">Back</a>
     </div>
 
     <br /><br />
