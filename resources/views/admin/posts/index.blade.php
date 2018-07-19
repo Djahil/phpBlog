@@ -37,14 +37,16 @@
                     <a href="{{route("posts.show", $post->id)}}" style="margin: 0 10px;">
                         <button type="button" class="btn btn-info">Show</button>
                     </a>
-                    <a href="{{route("posts.edit", $post->id)}}" style="margin: 0 10px;">
-                        <button type="button" class="btn btn-primary">Edit</button>
-                    </a>
-                    {!! Form::open(["method" => "DELETE", "action" => ["AdminPostsController@destroy", $post->id], 'style'=>'margin: 0 10px;']) !!}
+                    @if($post->user_id == Auth::user()->id)
+                        <a href="{{route("posts.edit", $post->id)}}" style="margin: 0 10px;">
+                            <button type="button" class="btn btn-primary">Edit</button>
+                        </a>
+                        {!! Form::open(["method" => "DELETE", "action" => ["AdminPostsController@destroy", $post->id], 'style'=>'margin: 0 10px;']) !!}
 
-                        {!! Form::submit("Delete", ["class" => "btn btn-danger"]) !!}
+                            {!! Form::submit("Delete", ["class" => "btn btn-danger"]) !!}
 
-                    {!! Form::close() !!}
+                        {!! Form::close() !!}
+                    @endif
                 </td>
             </tr>
         @endforeach
@@ -54,9 +56,11 @@
     <div style="text-align: center; margin-top: 100px;">
 
         <a href="{{route("posts.create")}}">
-            <button type="button" class="btn btn-success">Create</button>
+            <button type="button" class="btn btn-primary btn-lg">Create</button>
         </a>
-        <a href="{{route("admin.dashboard")}}">Back</a>
+        <a href="{{route("admin.dashboard")}}">
+            <button type="button" class="btn btn-secondary btn-lg">Back</button>
+        </a>
     </div>
 
     {{--@include('flash-message')--}}

@@ -17,7 +17,7 @@ class isModerator
     public function handle($request, Closure $next)
     {
         // Si l'utilisateur est Admin
-        if (Auth::user()->isModerator()) {
+        if (Auth::user()->isAdmin() || Auth::user()->isModerator()) {
             // On redirige vers la page demandée
             return $next($request);
         }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -29,6 +30,7 @@ class HomeController extends Controller
 
     public function home()
     {
+
         $posts = Post::all();
         return view('index', compact("posts"));
     }

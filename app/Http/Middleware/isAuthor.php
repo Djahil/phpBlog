@@ -17,7 +17,7 @@ class isAuthor
     public function handle($request, Closure $next)
     {
         // Si l'utilisateur est Admin
-        if (Auth::user()->isAuthor()) {
+        if (Auth::user()->isAdmin() || Auth::user()->isAuthor()) {
             // On redirige vers la page demandée
             return $next($request);
         }

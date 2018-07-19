@@ -17,23 +17,29 @@
 
 Route::get('/', 'HomeController@home')->name("index");
 
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/admin', 'AdminController@index')->name("admin.dashboard");
+});
 
 /*
 * Route vers la section admin
 */
 
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'isAdmin'], function() {
 
     /*
-    * Route vers le dashboard admin
+    * Route vers les catégories de la section admin
     */
-
-    Route::get('/admin', 'AdminController@index')->name("admin.dashboard");
-
     Route::resource('/admin/categories', 'AdminCategoriesController');
 
-    /* Route::get('/admin/posts', 'AdminPostsController@index')->name("index"); */
+    /*
+    * Route vers les users de la section admin
+    */
+    Route::resource('/admin/users', 'AdminUsersController');
 
+});
+
+Route::group(['middleware' => 'isModerator'], function() {
     /*
     * Route vers les comments de la section admin
     */
@@ -44,16 +50,13 @@ Route::group(['middleware' => 'auth'], function() {
         'destroy'
     ]] );
 
-    /*
-    * Route vers les users de la section admin
-    */
-    Route::resource('/admin/users', 'AdminUsersController');
+});
 
+Route::group(['middleware' => 'isAuthor'], function() {
     /*
     * Route vers les posts de la section admin
     */
     Route::resource('/admin/posts', 'AdminPostsController');
-
 });
 
 

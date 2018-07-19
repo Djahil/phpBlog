@@ -8,12 +8,13 @@ use App\Post;
 use App\User;
 use App\Comment;
 use App\Http\Requests\PostsRequest;
+use Illuminate\Support\Facades\Auth;
 
 class AdminPostsController extends Controller
 {
     // Permet d'isoler le constructeur pour un middleware donné
     public function __construct(){
-        $this->middleware('isAdmin');
+        $this->middleware('isAuthor');
     }
 
     /**
@@ -39,7 +40,8 @@ class AdminPostsController extends Controller
 
     public function store(PostsRequest $request)
     {
-        $User = User::findOrFail(1);
+        $AuthUser = Auth::user()->id;
+        $User = User::findorfail($AuthUser);
 
       // On récupère l'id de la catégorie sélectionnée dans le select
         $inputCatId = $request->input('Categories');
