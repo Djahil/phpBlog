@@ -45,6 +45,8 @@
     </table>
 
     <div style="text-align: center; margin-top: 100px;">
-        <a href="{{route("admin.dashboard")}}">Back</a>
+        <a href="{{route("admin.dashboard")}}">
+            <button type="button" class="btn btn-secondary btn-lg">Back</button>
+        </a>
     </div>
 @stop

@@ -46,6 +46,7 @@ Route::group(['middleware' => 'isModerator'], function() {
     Route::resource('/admin/comments', 'AdminCommentsController', ['only'=>[
         'index',
         'edit',
+        'show',
         'update',
         'destroy'
     ]] );

@@ -42,6 +42,13 @@ class AdminCommentsController extends Controller
         return view('admin.comments.edit', compact("Comment"));
     }
 
+    public function show($id)
+    {
+        $Comment = Comment::findOrFail($id);
+
+        return view('admin.comments.show', compact("Comment"));
+    }
+
     public function update(CommentsRequest $request, $id)
     {
         //Cherche le comment à modifier

@@ -16,13 +16,6 @@
 
     {!! Form::close() !!}
 
-
-    {!! Form::open(["method" => "DELETE", "action" => ["AdminCategoriesController@destroy", $Category->id], 'style'=>'display:grid; width:500px; margin:auto;']) !!}
-
-        {!! Form::submit("Delete") !!}
-
-    {!! Form::close() !!}
-
     <br />
     <div style="text-align: center">
         <a href="{{route("categories.index", $Category->id)}}">Back</a>

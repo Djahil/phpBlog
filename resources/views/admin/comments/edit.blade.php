@@ -21,12 +21,6 @@
 
     {!! Form::close() !!}
 
-    {!! Form::open(["method" => "DELETE", "action" => ["AdminCommentsController@destroy", $Comment->id], 'style'=>'display:grid; width:500px; margin:auto;']) !!}
-
-    {!! Form::submit("Delete") !!}
-
-    {!! Form::close() !!}
-
     <br />
     <div style="text-align: center">
         <a href="{{route("comments.index")}}">Back</a>

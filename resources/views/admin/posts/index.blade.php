@@ -37,7 +37,7 @@
                     <a href="{{route("posts.show", $post->id)}}" style="margin: 0 10px;">
                         <button type="button" class="btn btn-info">Show</button>
                     </a>
-                    @if($post->user_id == Auth::user()->id)
+                    @if($post->user_id == Auth::user()->id || Auth::user()->isAdmin())
                         <a href="{{route("posts.edit", $post->id)}}" style="margin: 0 10px;">
                             <button type="button" class="btn btn-primary">Edit</button>
                         </a>
