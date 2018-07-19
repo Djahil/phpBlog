@@ -27,16 +27,48 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function roles() {
-        return $this->hasMany('App\Role');
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
     }
 
-    public function posts() {
+    public function posts()
+    {
         return $this->hasMany('App\Post');
     }
 
-    public function isAdmin(){
+    public function isAdmin()
+    {
 
-        return($this->roles->name == 'Administrator') ? true : false;
+        foreach ($this->roles as $role) {
+            if ($role->name == 'Administrator') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public function isAuthor()
+    {
+
+        foreach ($this->roles as $role) {
+            if ($role->name == 'Author') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function isModerator()
+    {
+
+        foreach ($this->roles as $role) {
+            if ($role->name == 'Moderator') {
+                return true;
+            }
+        }
+        return false;
     }
 }
+

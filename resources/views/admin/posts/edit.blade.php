@@ -22,12 +22,6 @@
 
     {!! Form::close() !!}
 
-    {!! Form::open(["method" => "DELETE", "action" => ["AdminPostsController@destroy", $Post->id], 'style'=>'display:grid; width:500px; margin:auto;']) !!}
-
-        {!! Form::submit("Delete") !!}
-
-    {!! Form::close() !!}
-
     <br />
     <div style="text-align: center">
         <a href="{{route("posts.show", $Post->id)}}">Back</a>

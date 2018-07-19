@@ -15,7 +15,7 @@
  * Route vers la homepage
  */
 
-Route::get('/', 'HomeController@home');
+Route::get('/', 'HomeController@home')->name("index");
 
 
 /*

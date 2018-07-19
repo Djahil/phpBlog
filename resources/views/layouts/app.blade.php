@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Les 400 culs</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -94,7 +94,7 @@
                     <!-- Branding Image -->
                     {{--@if (Auth::user()->isAdmin())--}}
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        Les 400 culs
                     </a>
                     {{--@endif--}}
                 </div>
@@ -119,6 +119,11 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        @if (Auth::user()->isAdmin() || Auth::user()->isModerator() || Auth::user()->isAuthor())
+                                            <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                        @endif
+                                    </li>
+                                    <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -129,6 +134,7 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+
                                 </ul>
                             </li>
                         @endif
