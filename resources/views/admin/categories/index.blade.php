@@ -7,7 +7,6 @@
     <table class="table table-striped" style="width: 1500px;margin: auto;">
         <thead>
         <tr>
-            <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Updated At</th>
             <th scope="col">Action</th>
@@ -19,8 +18,7 @@
             un lien qui redirige vers la page show de ce post --}}
             @foreach($Categories as $category)
                 <tr>
-                    <th scope="row">{{ $category->id }}</th>
-                    <td>{{ $category->name }}</td>
+                    <th scope="row">{{ $category->name }}</th>
                     <td>{{ $category->updated_at }}</td>
                     <td style="display: flex;" class="action">
 

@@ -18,7 +18,9 @@
 
     <br />
     <div style="text-align: center">
-        <a href="{{route("categories.index", $Category->id)}}">Back</a>
+        <a href="{{route("categories.index", $Category->id)}}">
+            <button type="button" class="btn btn-secondary btn-lg">Back</button>
+        </a>
     </div>
 
 @stop

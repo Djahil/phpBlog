@@ -12,6 +12,8 @@
     {!! Form::label("images", "Images") !!}
     {!! Form::file('images') !!}
 
+    <br />
+
     {!! Form::submit("Create Category") !!}
 
     {!! Form::close() !!}
@@ -20,7 +22,9 @@
 
     <br />
     <div style="text-align: center">
-        <a href="{{route("categories.index")}}">Back</a>
+        <a href="{{route("categories.index")}}">
+            <button type="button" class="btn btn-secondary btn-lg">Back</button>
+        </a>
     </div>
 
 @stop

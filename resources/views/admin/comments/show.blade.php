@@ -11,7 +11,9 @@
     {!! Form::close() !!}
 
     <div style="text-align: center">
-        <a href="{{route("comments.index")}}">Back</a>
+        <a href="{{route("comments.index")}}">
+            <button type="button" class="btn btn-secondary btn-lg">Back</button>
+        </a>
     </div>
 
 @stop

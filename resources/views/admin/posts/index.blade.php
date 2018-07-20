@@ -29,8 +29,17 @@
             <tr>
                 <th scope="row">{{ $post->id }}</th>
                 <td>{{ $post->title }}</td>
-                <td>{{ $post->content }}</td>
-                <td>{{ $post->category_id }}</td>
+                <td>
+                    @if(strlen($post->content)>=100)
+                        <?php
+                        $content = substr($post->content,0,100) . "..." ;
+                        echo $content;
+                        ?>
+                    @else
+                        {{$post->content}}
+                    @endif
+                </td>
+                <td>{{ $post->category ? $post->category->name : "Non classé"}}</td>
                 <td>{{ $post->created_at }}</td>
                 <td>{{ $post->updated_at }}</td>
                 <td style="display: flex;" class="action">
@@ -54,7 +63,6 @@
     </table>
 
     <div style="text-align: center; margin-top: 100px;">
-
         <a href="{{route("posts.create")}}">
             <button type="button" class="btn btn-primary btn-lg">Create</button>
         </a>

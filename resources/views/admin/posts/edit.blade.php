@@ -4,7 +4,7 @@
 
     <h1 style="text-align: center">Edit Post</h1>
 
-    {!! Form::model($Post, ["method" => "PATCH", "action" => ["AdminPostsController@update", $Post->id],'style'=>'display:grid; width:500px; margin:auto;']) !!}
+    {!! Form::model($Post, ["method" => "PATCH", "action" => ["AdminPostsController@update", $Post->id], "files" => true, 'style'=>'display:grid; width:500px; margin:auto;']) !!}
 
         {!! Form::label("title", "Title") !!}
         {!! Form::text("title", null) !!}
@@ -13,18 +13,19 @@
         {!! Form::textarea("content", null) !!}
 
         {!! Form::label("images", "Images") !!}
-        {!! Form::file('images') !!}
+        {!! Form::file('image') !!}
 
         {!! Form::label("categories", "Categories") !!}
         {!! Form::select('Categories', $Categories) !!}
 
-        {!! Form::submit("Update")!!}
+    <div style="text-align: center; margin-top: 10px;">
+        {!! Form::submit("Update", ['class' => 'btn btn-primary btn-lg'])!!}
 
     {!! Form::close() !!}
 
-    <br />
-    <div style="text-align: center">
-        <a href="{{route("posts.show", $Post->id)}}">Back</a>
+        <a href="{{route("posts.index")}}">
+            <button type="button" class="btn btn-secondary btn-lg">Back</button>
+        </a>
     </div>
 
 @stop

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Photo;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
@@ -33,6 +34,9 @@ class PostsController extends Controller
     {
         $Post = Post::findOrFail($id);
         $Comments = $Post->comments()->whereIsActive(1)->get();
+
+
+
 
         return view('show', compact("Post", "Comments"));
     }
