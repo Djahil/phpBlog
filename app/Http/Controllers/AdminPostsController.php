@@ -5,12 +5,19 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Post;
+use App\Photo;
 use App\User;
 use App\Comment;
 use App\Http\Requests\PostsRequest;
+use Illuminate\Support\Facades\Auth;
 
 class AdminPostsController extends Controller
 {
+    // Permet d'isoler le constructeur pour un middleware donné
+    public function __construct(){
+        $this->middleware('isAuthor');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,26 +34,40 @@ class AdminPostsController extends Controller
 
     public function create()
     {
-        $Categories = Category::pluck('name');
+        $Categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
 
         return view('admin.posts.create', compact("Categories"));
     }
 
     public function store(PostsRequest $request)
     {
-        $User = User::findOrFail(1);
+        $AuthUser = Auth::user()->id;
+        $User = User::findorfail($AuthUser);
 
-      // On récupère l'id de la catégorie sélectionnée dans le select
+        // On récupère l'id de la catégorie sélectionnée dans le select
         $inputCatId = $request->input('Categories');
 
-
-        $User->posts()->save(
+        $Post = $User->posts()->save(
             new Post($request->all())
         );
 
-        // On redirige vers la page index
-        return redirect()->route("posts.index")->with('success', 'Votre post a bien été crée');
 
+        // Si le champ file n'est pas vide
+        if(!empty($request->file('image'))) {
+            // On récupère le nom de l'image
+            $name = date('Y-m-d_H-i-s')."_".$request->file('image')->getClientOriginalName();
+
+            // On copie l'image dans le dossier '/public/img' en modifiant le nom
+            $request->file('image')->move('img', $name);
+
+            // On sauve le nom de la photo dans la BDD en passant par Post
+            $Post->photos()->save(
+                new Photo(['file'=>$name])
+            );
+        }
+
+        // On redirige vers la page index
+        return redirect()->route("posts.index")->with('success', 'Votre post a bien été créé');
     }
 
     /**
@@ -58,8 +79,9 @@ class AdminPostsController extends Controller
     public function show($id)
     {
         $Post = Post::findOrFail($id);
+        $Categories = Category::all()->pluck('name', 'id');
 
-        return view('admin.posts.show', compact("Post"));
+        return view('admin.posts.show', compact("Post", "Categories"));
     }
 
     /**
@@ -74,6 +96,8 @@ class AdminPostsController extends Controller
 
         $Categories = Category::pluck('name');
 
+
+
         return view('admin.posts.edit', compact("Post", "Categories"));
     }
 
@@ -86,17 +110,37 @@ class AdminPostsController extends Controller
      */
     public function update(PostsRequest $request, $id)
     {
+
+
         //Cherche le post à modifier
         $Post = Post::findOrFail($id);
 
         //On le met à jour avec les nouvelles données
         $Post->update($request->all());
 
+        // Si le champ file n'est pas vide
+        if(!empty($request->file('image'))) {
+
+            // On récupère le nom de l'image
+            $name = date('Y-m-d_H-i-s')."_".$request->file('image')->getClientOriginalName();
+
+            // On copie l'image dans le dossier '/public/img' en modifiant le nom
+            $request->file('image')->move('img', $name);
+
+            if(empty($Post->photos()->first())) {
+                // On sauve le nom de la photo dans la BDD en passant par Post
+                $Post->photos()->save(
+                    new Photo(['file'=>$name])
+                );
+            } else {
+                // On update le nom de la photo dans la BDD en passant par Post
+                $Post->photos()->update(['file'=>$name]);
+            }
+        }
+
         // On redirige vers la page de notre choix
         return redirect()->route('posts.index');
 
-        // var_dump($request->all());
-        // die();
     }
 
     /**
@@ -107,8 +151,12 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
+        $Post = Post::findOrFail($id);
         Post::whereId($id)->delete();
         Comment::wherePostId($id)->delete();
+        if($Post->photos()->first()) {
+            $Post->photos()->delete();
+        }
 
         return redirect()->route('posts.index');
     }

@@ -2,53 +2,56 @@
 
 @section('content')
 
-    <h1 style="text-align: center">{{$Post->title}}</h1>
+    @if(isset($Post->photos()->first()->file))
+        <div style="width: 100%;height: 500px; background-image: url('{{  $Post->photos()->first()->file  }}'); background-size: cover;"></div>
+    @endif
+    <div style="padding: 20px;">
+        <h1 style="text-align:center; margin-bottom: 20px;">{{$Post->title}}</h1>
 
-    <p style="margin:auto;  width: 500px;">{{$Post->content}}</p>
+        <h3 style="text-align:center; font-style: italic">Catégorie : {{$Post->category->name}}</h3>
 
-    <br />
-    <div style="text-align: center">
-        <a href="{{route("guest.index")}}">Back</a>
-    </div>
+        <p style="margin:auto;  width: 900px; font-size: 16px">{{$Post->content}}</p>
 
-    <br /><br />
+        <br />
 
-    <button id="commentButton">Add a comment</button>
+        <div style="text-align: center">
+            <button id="commentButton" class="btn btn-success btn-lg">Add a comment</button>
+            <a href="{{route("index")}}">
+                <button type="button" class="btn btn-primary btn-lg">Back</button>
+            </a>
+        </div>
 
-    <div id="formComment" style="display: none;">
-        {!! Form::open(["method" => "POST", "action" => ["CommentsController@store", $Post->id],'style'=>'display:grid; width:500px; margin:auto;']) !!}
+        <div id="formComment" style="display: none;">
+            {!! Form::open(["method" => "POST", "action" => ["CommentsController@store", $Post->id],'style'=>'display:grid; width:500px; margin:auto;']) !!}
 
-        {!! Form::label("author", "Name") !!}
-        {!! Form::text("author", null) !!}
+            {!! Form::label("author", "Name") !!}
+            {!! Form::text("author", null) !!}
 
-        {!! Form::label("email", "Email") !!}
-        {!! Form::text('email', null) !!}
+            {!! Form::label("email", "Email") !!}
+            {!! Form::text('email', null) !!}
 
-        {!! Form::label("content", "Content") !!}
-        {!! Form::textarea("content", null) !!}
+            {!! Form::label("content", "Content") !!}
+            {!! Form::textarea("content", null) !!}
 
-        {!! Form::submit("Create")!!}
+            {!! Form::submit("Create")!!}
 
-        {!! Form::close() !!}
-    </div>
+            {!! Form::close() !!}
+        </div>
 
-    <br /><br /><br />
-
-    <div>
-        <ul style="display: grid; margin:auto;  width: 500px;">
+        <div style="display: grid; margin:auto;  width: 800px; margin-top: 20px">
             {{-- A chaque tour de boucle, tu vas créer un élement LI avec le titre du post et
-            un lien qui redirige vers la page show de ce post --}}
+                un lien qui redirige vers la page show de ce post --}}
             @foreach($Comments as $comment)
-                <li>
-                    <div>
-                        <p>{{$comment->author}}</p>
-                        <p>{{$comment->email}}</p><br />
-                        <p>{{$comment->content}}</p><br />
-                        <br />
+                <div style="padding: 20px; background-color: #e2e2e2; border-radius: 10px;">
+                    <div style="display: flex;">
+                        <p style="font-size: large; font-weight: bold; margin-right: 5px; border-radius: 50%;width: 60px; text-align: center; padding-top: 14px; background-color: @php $color = ['Aquamarine', 'BurlyWood', 'CadetBlue', 'Coral', 'HotPink']; echo $color[rand(0, 4)]; @endphp;">@php echo substr($comment->author, 0, 1) @endphp</p>
+                        <p style="font-size: large; font-weight: bold; padding: 15px;">{{$comment->author}}</p>
+                        <p style="font-size: small; margin-top: 20px;">Posté le {{$comment->created_at}}</p>
                     </div>
-                </li>
+                    <p>{{$comment->content}}</p>
+                </div>
             @endforeach
-        </ul>
+        </div>
     </div>
 
 @stop
@@ -64,8 +67,6 @@
             form.style.display = "block";
             button.style.display = "none";
         })
-
-
 
 
     </script>

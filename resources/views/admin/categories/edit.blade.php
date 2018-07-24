@@ -9,23 +9,15 @@
         {!! Form::label("name", "Name") !!}
         {!! Form::text("name", null) !!}
 
-        {!! Form::label("images", "Images") !!}
-        {!! Form::file('images') !!}
-
         {!! Form::submit("Update")!!}
-
-    {!! Form::close() !!}
-
-
-    {!! Form::open(["method" => "DELETE", "action" => ["AdminCategoriesController@destroy", $Category->id], 'style'=>'display:grid; width:500px; margin:auto;']) !!}
-
-        {!! Form::submit("Delete") !!}
 
     {!! Form::close() !!}
 
     <br />
     <div style="text-align: center">
-        <a href="{{route("categories.index", $Category->id)}}">Back</a>
+        <a href="{{route("categories.index", $Category->id)}}">
+            <button type="button" class="btn btn-secondary btn-lg">Back</button>
+        </a>
     </div>
 
 @stop

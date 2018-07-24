@@ -4,8 +4,8 @@
 
     <h1 style="text-align: center">Edit Comment</h1><br /><br />
 
-    <h4>{{$Comment->author}}</h4>
-    <p>{{$Comment->email}}</p>
+    <h4 style="text-align: center">{{$Comment->author}}</h4>
+    <p style="text-align: center">{{$Comment->email}}</p>
 
     {!! Form::model($Comment, ["method" => "PATCH", "action" => ["AdminCommentsController@update", $Comment->id],'style'=>'display:grid; width:500px; margin:auto;']) !!}
 
@@ -21,15 +21,11 @@
 
     {!! Form::close() !!}
 
-    {!! Form::open(["method" => "DELETE", "action" => ["AdminCommentsController@destroy", $Comment->id], 'style'=>'display:grid; width:500px; margin:auto;']) !!}
-
-    {!! Form::submit("Delete") !!}
-
-    {!! Form::close() !!}
-
     <br />
     <div style="text-align: center">
-        <a href="{{route("comments.index")}}">Back</a>
+        <a href="{{route("comments.index")}}">
+            <button type="button" class="btn btn-secondary btn-lg">Back</button>
+        </a>
     </div>
 
 

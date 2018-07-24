@@ -10,6 +10,11 @@ use App\Http\Requests\CommentsRequest;
 
 class AdminCommentsController extends Controller
 {
+    // Permet d'isoler le constructeur pour un middleware donné
+    public function __construct(){
+        $this->middleware('isModerator');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,6 +40,13 @@ class AdminCommentsController extends Controller
         $Comment = Comment::findOrFail($id);
 
         return view('admin.comments.edit', compact("Comment"));
+    }
+
+    public function show($id)
+    {
+        $Comment = Comment::findOrFail($id);
+
+        return view('admin.comments.show', compact("Comment"));
     }
 
     public function update(CommentsRequest $request, $id)

@@ -29,22 +29,33 @@
             <tr>
                 <th scope="row">{{ $post->id }}</th>
                 <td>{{ $post->title }}</td>
-                <td>{{ $post->content }}</td>
-                <td>{{ $post->category_id }}</td>
+                <td>
+                    @if(strlen($post->content)>=100)
+                        <?php
+                        $content = substr($post->content,0,100) . "..." ;
+                        echo $content;
+                        ?>
+                    @else
+                        {{$post->content}}
+                    @endif
+                </td>
+                <td>{{ $post->category ? $post->category->name : "Non classé"}}</td>
                 <td>{{ $post->created_at }}</td>
                 <td>{{ $post->updated_at }}</td>
                 <td style="display: flex;" class="action">
                     <a href="{{route("posts.show", $post->id)}}" style="margin: 0 10px;">
                         <button type="button" class="btn btn-info">Show</button>
                     </a>
-                    <a href="{{route("posts.edit", $post->id)}}" style="margin: 0 10px;">
-                        <button type="button" class="btn btn-primary">Edit</button>
-                    </a>
-                    {!! Form::open(["method" => "DELETE", "action" => ["AdminPostsController@destroy", $post->id], 'style'=>'margin: 0 10px;']) !!}
+                    @if($post->user_id == Auth::user()->id || Auth::user()->isAdmin())
+                        <a href="{{route("posts.edit", $post->id)}}" style="margin: 0 10px;">
+                            <button type="button" class="btn btn-primary">Edit</button>
+                        </a>
+                        {!! Form::open(["method" => "DELETE", "action" => ["AdminPostsController@destroy", $post->id], 'style'=>'margin: 0 10px;']) !!}
 
-                        {!! Form::submit("Delete", ["class" => "btn btn-danger"]) !!}
+                            {!! Form::submit("Delete", ["class" => "btn btn-danger"]) !!}
 
-                    {!! Form::close() !!}
+                        {!! Form::close() !!}
+                    @endif
                 </td>
             </tr>
         @endforeach
@@ -52,11 +63,12 @@
     </table>
 
     <div style="text-align: center; margin-top: 100px;">
-
         <a href="{{route("posts.create")}}">
-            <button type="button" class="btn btn-success">Create</button>
+            <button type="button" class="btn btn-primary btn-lg">Create</button>
         </a>
-        <a href="{{route("admin.dashboard")}}">Back</a>
+        <a href="{{route("admin.dashboard")}}">
+            <button type="button" class="btn btn-secondary btn-lg">Back</button>
+        </a>
     </div>
 
     {{--@include('flash-message')--}}
