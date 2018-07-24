@@ -8,7 +8,12 @@
     <div style="padding: 20px;">
         <h1 style="text-align:center; margin-bottom: 20px;">{{$Post->title}}</h1>
 
+    @if(isset($Post->category->name))
         <h3 style="text-align:center; font-style: italic">Catégorie : {{$Post->category->name}}</h3>
+    @else
+        <h3 style="text-align:center; font-style: italic">Catégorie : Non classé</h3>
+    @endif
+
 
         <p style="margin:auto;  width: 900px; font-size: 16px">{{$Post->content}}</p>
 

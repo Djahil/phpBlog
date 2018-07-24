@@ -11,7 +11,7 @@
         un lien qui redirige vers la page show de ce post --}}
         @foreach($posts as $post)
             <div style="width: 400px; margin-bottom: 20px; margin-top: 20px; box-shadow: 0px 0px 30px -1px rgba(0,0,0,0.53); cursor: pointer;" onclick="window.location='{{route("show", $post->id)}}'">
-                <div style="width: 100%; height: 150px;background-image: url('{{ $post->photos()->first() ? $post->photos()->first()->file : 'https://www.syncsas.com/wp-content/uploads/2018/03/journey-as-a-web-developer.jpg' }}'); background-size: cover;"></div>
+                <div style="width: 100%; height: 150px;background-image: url('{{ $post->photos()->first() ? $post->photos()->first()->file : 'http://seriousmovies.com/wp-content/uploads/2014/02/salle-cinema-francais.jpg' }}'); background-size: cover;"></div>
 
                 <div style="padding: 20px;">
                     <h1 style="margin: 0;">
