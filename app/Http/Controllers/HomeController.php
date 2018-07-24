@@ -19,15 +19,10 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Homepage of blog
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('admin.index');
-    }
-
     public function home()
     {
 

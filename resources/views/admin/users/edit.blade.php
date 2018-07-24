@@ -28,13 +28,15 @@
         {!! Form::label("role", "Moderator") !!}
     </div>
 
-    {!! Form::submit("Update")!!}
+    {{--{!! Form::submit("Update")!!}--}}
+    {!! Form::submit("Update", ["class" => "btn btn-success btn-lg", 'style'=>'width:100px; margin:auto; font-size:18px;']) !!}
 
     {!! Form::close() !!}
 
-    <br />
-    <div style="text-align: center">
-        <a href="{{route("users.index", $user->id)}}">Back</a>
+    <div style="text-align: center; margin-top: 10px;">
+        <a href="{{route("users.index", $user->id)}}">
+            <button type="button" class="btn btn-secondary btn-lg" style="width: 100px;">Back</button>
+        </a>
     </div>
 
 @stop

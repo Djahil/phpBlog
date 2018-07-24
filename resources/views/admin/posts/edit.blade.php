@@ -15,8 +15,8 @@
         {!! Form::label("images", "Images") !!}
         {!! Form::file('image') !!}
 
-        {!! Form::label("categories", "Categories") !!}
-        {!! Form::select('Categories', $Categories) !!}
+        {!! Form::label("category_id", "Categories") !!}
+        {!! Form::select('category_id', $Categories) !!}
 
     <div style="text-align: center; margin-top: 10px;">
         {!! Form::submit("Update", ['class' => 'btn btn-primary btn-lg'])!!}

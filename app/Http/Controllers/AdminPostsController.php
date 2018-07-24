@@ -94,9 +94,7 @@ class AdminPostsController extends Controller
     {
         $Post = Post::findOrfail($id);
 
-        $Categories = Category::pluck('name');
-
-
+        $Categories = Category::pluck('name', 'id');
 
         return view('admin.posts.edit', compact("Post", "Categories"));
     }
@@ -110,13 +108,12 @@ class AdminPostsController extends Controller
      */
     public function update(PostsRequest $request, $id)
     {
-
-
         //Cherche le post à modifier
         $Post = Post::findOrFail($id);
 
         //On le met à jour avec les nouvelles données
         $Post->update($request->all());
+
 
         // Si le champ file n'est pas vide
         if(!empty($request->file('image'))) {
