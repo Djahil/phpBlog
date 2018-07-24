@@ -11,7 +11,6 @@
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Role</th>
-            <th scope="col">Is_active</th>
             <th scope="col">Updated At</th>
             <th scope="col">Action</th>
         </tr>
@@ -27,7 +26,6 @@
                         {{$role->name . " "}}
 
                     @endforeach</td>
-                <td>{{ $user->is_active }}</td>
                 <td>{{ $user->updated_at }}</td>
                 <td style="display: flex;" class="action">
                     <a href="{{route("users.edit", $user->id)}}" style="margin: 0 10px;">

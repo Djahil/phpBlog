@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>The Foo-Coders</title>
+    <title>CineFiles</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -78,6 +78,10 @@
         .navbar {
             margin-bottom: 0 !important;
         }
+
+        .table > thead > tr > th {
+            border-bottom: none !important;
+        }
     </style>
 
 </head>
@@ -98,7 +102,7 @@
                     <!-- Branding Image -->
                     {{--@if (Auth::user()->isAdmin())--}}
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        The Foo-Coders
+                        CineFiles
                     </a>
                     {{--@endif--}}
                 </div>

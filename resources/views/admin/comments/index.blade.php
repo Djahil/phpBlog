@@ -23,7 +23,16 @@
                 <td>{{ $comment->post->title }}</td>
                 <td>{{ $comment->author }}</td>
                 <td>{{ $comment->email }}</td>
-                <td>{{ $comment->content }}</td>
+                <td>
+                    @if(strlen($comment->content)>=100)
+                        <?php
+                        $content = substr($comment->content,0,100) . "..." ;
+                        echo $content;
+                        ?>
+                    @else
+                        {{$comment->content}}
+                    @endif
+                </td>
                 <td>
                     @if($comment->is_active == 1)
                         yes
@@ -31,13 +40,18 @@
                         no
                     @endif
                 </td>
-                <td>
+                <td style="display: flex;" class="action">
                     <a href="{{route("comments.show", $comment->id)}}" style="margin: 0 10px;">
                         <button type="button" class="btn btn-primary">Show</button>
                     </a>
                     <a href="{{route("comments.edit", $comment->id)}}" style="margin: 0 10px;">
                         <button type="button" class="btn btn-primary">Edit</button>
                     </a>
+                    {!! Form::open(["method" => "DELETE", "action" => ["AdminCommentsController@destroy", $comment->id], 'style'=>'margin: 0 10px;']) !!}
+
+                    {!! Form::submit("Delete", ["class" => "btn btn-danger"]) !!}
+
+                    {!! Form::close() !!}
                 </td>
 
         @endforeach

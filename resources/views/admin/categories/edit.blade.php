@@ -9,9 +9,6 @@
         {!! Form::label("name", "Name") !!}
         {!! Form::text("name", null) !!}
 
-        {!! Form::label("images", "Images") !!}
-        {!! Form::file('images') !!}
-
         {!! Form::submit("Update")!!}
 
     {!! Form::close() !!}

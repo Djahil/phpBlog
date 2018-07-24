@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1 style="text-align: center">Bienvenue sur le blog des codeurs foo !</h1>
+    <h1 style="text-align: center">Bienvenue sur CineFiles !</h1>
 
     <br />
 
